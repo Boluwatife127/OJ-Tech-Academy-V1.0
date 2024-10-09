@@ -63,15 +63,17 @@
     }
 
     .left-section .date {
-      margin-left: 50px;
+      margin-left: 20px;
     }
 
     .date {
-      margin-left: 20px;
+     
       font-size: 1.1rem;
       font-weight: 900;
     }
-
+   #dating{
+    margin-left: 23px;
+   }
     .son {
       display: none;
     }
@@ -601,8 +603,13 @@
 
     .class .time-events {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       gap: 10px;
+      /* width: 10%; */
+      
+    }
+    #time-events{
+       width: 100%;
     }
 
     .class h6 {
@@ -621,7 +628,7 @@
 
     .class .img {
       height: 8.5rem;
-      width: 15rem;
+      width: 18rem;
       background-image: url("images/ll.png");
       border-radius: 10px;
       background-position: center;
@@ -671,7 +678,7 @@
     .class .ban {
       display: flex;
       margin-top: 16px;
-      width: 23.5rem;
+      width: 100%;
       border-radius: 10px;
       background-color: whitesmoke;
       box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
@@ -1295,7 +1302,7 @@ a{
 
     </div>
     <div class="calender" id="end">
-      <div class="date">
+      <div class="date" id="dating">
         <h2><i class="uil uil-calendar-alt"></i> Calender</h2>
         <div id="calendar">
           <div class="calendar-header">
@@ -1374,6 +1381,62 @@ a{
     sidebarOpen = !sidebarOpen;
   }
 
+
+
+  const style = document.createElement('style');
+style.innerHTML = `
+  @media (max-width: 395px) {
+    .class .time-events {
+      display: block !important;
+      gap: 0 !important;
+    }
+    .class .ban {
+      width: 100% !important;
+      display: block !important;
+      margin: 20px 0 0 0 !important; /* Center the cards */
+      box-sizing: border-box !important; /* Ensure it fits within the viewport */
+    }
+    .class .img {
+      width: 100% !important;
+    }
+    .class .tex {
+      width: 100% !important;
+    }
+    .class .ban button {
+      margin: 0 auto !important;
+      display: block !important;
+    }
+    /* Target section2 .ban elements specifically */
+    .section2 .ban {
+      width: 100% !important;
+      display: block !important;
+      margin-left: 387px !important; /* Fix margin between .ban in section2 */
+    }
+
+    .section2 {
+      width: 100% !important;
+      display: block !important;
+       /* Fix margin between .ban in section2 */
+    }
+        .section2 h1 {
+      margin-left: 507px !important;
+       /* Fix margin between .ban in section2 */
+    }
+        .section2  #it {
+       display: inline-block !important;
+      
+       /* Fix margin between .ban in section2 */
+    }
+       
+      
+
+    /* Adjust the margin between section1 and section2 */
+    .section2 {
+      margin-top: 25px !important; /* Decrease top margin */
+    }
+  }
+`;
+document.head.appendChild(style);
 
 
   function submitQuiz() {

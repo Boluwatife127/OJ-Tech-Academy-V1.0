@@ -1,4 +1,4 @@
-@media (max-width: 460px) {
+@media (max-width: 660px) {
     /* .container{
         margin-top: 50px;
         top: 70px;
@@ -51,7 +51,8 @@
 
     #profilePic {
         margin: 0 auto;
-        /* margin-left: 70px; */
+        margin-top: -40px;
+        /* margin-left: 0px; */
     }
 
     #profileForm {
@@ -70,8 +71,8 @@
     #profileImage {
         width: 150px;
         height: 150px;
-        margin-left: 70px;
-        margin-top: -80px;
+        margin-left: 50px;
+        margin-top: -100px;
     }
 
     .profile-container1 input, textarea {
@@ -86,27 +87,31 @@
   .class .time-events {
     display: block;
     justify-content: space-around;
-    padding: 0 10px;
+   
+   
 }
 
 .class .ban {
     width: 100%;
     margin: 10px 0;
+    
 }
-
+/* .section1{
+    margin: 20px -20px 20px -39px;
+}
 .section2 {
-    margin: 20px 0;
-}
+    margin: 20px -40px 20px 90px;
+} */
 
 /* Adjust text sizes */
-.class h6, .class h1 {
+.class h6, .class p {
     font-size: 1rem;
 }
 
 /* Adjust image sizes */
 .class .img {
     height: 6rem;
-    width: 100%;
+    width: 3rem;
   
 }
 
@@ -118,7 +123,10 @@
 }
 .section2{
     margin-top: 550px;
-    margin-left: -495px;
+    margin-left: -387px;
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;
 }
 .sometext {
     
