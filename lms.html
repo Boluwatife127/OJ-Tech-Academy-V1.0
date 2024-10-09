@@ -1440,6 +1440,49 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 
+  const styles = document.createElement('style');
+    styles.innerHTML = `
+      @media (max-width: 460px) {
+        /* Center the about section */
+        .about {
+          display: flex !important;
+          flex-direction: column !important; /* Stack elements vertically */
+          align-items: center !important; /* Center elements */
+        }
+
+        /* Center the abouti section */
+        .abouti {
+          display: flex !important;
+          flex-direction: column !important; /* Stack cards vertically */
+          align-items: center !important; /* Center cards */
+          gap: 10px !important; /* Optional: Maintain some gap between cards */
+        }
+
+        /* Card styles */
+        .abouti .card {
+          width: 100% !important; /* Set cards to 100% width */
+          max-width: none !important; /* Remove max-width restriction */
+          box-sizing: border-box !important; /* Include padding and border in width */
+          margin: 10px 0 !important; /* Add margin for spacing */
+        }
+
+        /* Image styles */
+        .about img {
+          width: 100% !important; /* Make images responsive */
+          height: auto !important; /* Maintain aspect ratio */
+          margin: 0 auto !important; /* Center images */
+        }
+
+        /* Ensure spans in about section are displayed as block */
+        .about span {
+          display: block !important; /* Make spans block elements */
+          text-align: center !important; /* Center text inside spans */
+        }
+      }
+    `;
+    document.head.appendChild(styles);
+
+
   function submitQuiz() {
     let score = 0, total = 6, answers = {q1: 'A', q2: 'A', q3: 'A', q4: 'C', q5: 'B', q6: 'C'};
     
