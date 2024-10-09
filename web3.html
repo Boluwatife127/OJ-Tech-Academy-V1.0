@@ -1,0 +1,69 @@
+<div class="grapphics3" id="graphics3" style="animation: floatInFromBottom 1s ease-out forwards;">
+    <h2><i class="uil uil-question-circle"></i> Introduction to Web Design Quiz</h2>
+
+    <div class="quiz-container">
+        <form id="quiz-form" onsubmit="return submitQuiz()">
+            <div class="io" id="quiz-formb">
+                <div class="question">
+                    <p>1. What is the primary purpose of web design?</p>
+                    <label><input type="radio" name="q1" value="A"> A) To create user-friendly websites</label><br>
+                    <label><input type="radio" name="q1" value="B"> B) To write code</label><br>
+                    <label><input type="radio" name="q1" value="C"> C) To analyze data</label><br>
+                </div>
+                <div class="question">
+                    <p>2. Which of the following is a design principle in web design?</p>
+                    <label><input type="radio" name="q2" value="A"> A) Balance</label><br>
+                    <label><input type="radio" name="q2" value="B"> B) Data Analysis</label><br>
+                    <label><input type="radio" name="q2" value="C"> C) Debugging</label><br>
+                </div>
+            </div>
+
+            <div class="io" id="quiz-formb">
+                <div class="question">
+                    <p>3. What does 'UI' stand for in web design?</p>
+                    <label><input type="radio" name="q3" value="A"> A) User Interface</label><br>
+                    <label><input type="radio" name="q3" value="B"> B) Unique Identifier</label><br>
+                    <label><input type="radio" name="q3" value="C"> C) Unified Input</label><br>
+                </div>
+                <div class="question">
+                    <p>4. Which color scheme uses colors opposite each other on the color wheel in web design?</p>
+                    <label><input type="radio" name="q4" value="A"> A) Analogous</label><br>
+                    <label><input type="radio" name="q4" value="B"> B) Monochromatic</label><br>
+                    <label><input type="radio" name="q4" value="C"> C) Complementary</label><br>
+                </div>
+            </div>
+
+            <div class="io" id="quiz-formb">
+                <div class="question">
+                    <p>5. What is typography concerned with in web design?</p>
+                    <label><input type="radio" name="q5" value="A"> A) Color combinations</label><br>
+                    <label><input type="radio" name="q5" value="B"> B) Font styles and arrangement</label><br>
+                    <label><input type="radio" name="q5" value="C"> C) Image resolution</label><br>
+                </div>
+                <div class="question">
+                    <p>6. What is the importance of responsive design in web development?</p>
+                    <label><input type="radio" name="q6" value="A"> A) Ensures websites work on all devices</label><br>
+                    <label><input type="radio" name="q6" value="B"> B) Creates animations</label><br>
+                    <label><input type="radio" name="q6" value="C"> C) Writes content</label><br>
+                </div>
+            </div>
+
+            <div class="buttonss" id="btnBottoms">
+                <button id="webBtnSmall2" onclick="handleButtonClick('webBtnSmall2', 'web2.html')"> << Previous</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal" id="scoreModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Your Score</h2>
+            <p id="scoreText"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 OJ Tech Academy. All rights reserved.</p>
+    </footer>
+</div>

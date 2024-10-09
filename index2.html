@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Sign Up</title>
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="shortcut icon" href="images/try.jpg" type="image/x-icon">
+   
+  <style>
+    @font-face {
+      font-family: 'Poppins';
+      src: url('Font Folder/Poppins-Light.ttf') format('truetype');
+      /* Add additional src lines for different font weights/styles if needed */
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: poppins;
+    }
+
+    body {
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%), url('images/bridge.jpg');
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: 'poppins', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Removing default list styles */
+    li {
+      list-style: none;
+    }
+
+    /* Setting default styles for links */
+    a {
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    /* Styling for the header */
+    header {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation container styling */
+    .navigation {
+      height: auto;
+      width: 100%;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      width: 100%;
+      height: 60px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* backdrop-filter: blur(15px); */
+      position: fixed;
+      z-index: +1;
+
+    }
+
+    /* Logo styling */
+    .navbar .logo {
+      padding-left: 1rem;
+      color: #FFF;
+      font-size: 1.7rem;
+      font-weight: 400;
+    }
+
+    /* Links container styling */
+    .navbar .links {
+      padding-right: 0rem;
+    }
+
+    /* Logo link styling */
+    .navbar .logo a {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Navbar links styling */
+    .navbar .links {
+      display: flex;
+      gap: 0rem;
+      /* Adjust the gap between links */
+    }
+
+    /* Navbar link hover effect */
+    .navbar .links a {
+      font-size: 1rem;
+    }
+    /* Toggle button styling */
+    .navbar .toggle_btn {
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown_menu {
+      display: none;
+      position: absolute;
+      font-size: 1.2rem;
+      right: 2rem;
+      top: 80px;
+      height: 0;
+      width: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      overflow: hidden;
+      border-radius: 10px;
+      z-index: +1;
+      transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Dropdown menu open state */
+    .dropdown_menu.open {
+      height: auto;
+    }
+
+    /* Styling for dropdown menu links */
+    .dropdown_menu li a {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    /* Styling for dropdown menu list items */
+    .dropdown_menu li {
+      padding: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    /* Responsive styles for smaller screens */
+    @media (max-width: 992px) {
+      .navbar .links {
+        display: none;
+      }
+
+      .navbar .toggle_btn {
+        display: block;
+      }
+
+      .dropdown_menu {
+        display: block;
+      }
+      .text-words,h1,p{
+        display: none;
+      }
+    }
+
+    /* Styling for navigation links */
+    .navigation .navbar ul {
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* Styling for navbar links */
+    .navbar .links li a {
+      color: #fff;
+      padding: 8px 10px 8px 10px;
+    }
+
+    /* Styling for navbar link items */
+    .navbar .links li {
+      width: 140px;
+      height: 40px;
+      cursor: pointer;
+      line-height: 40px;
+      text-align: center;
+      font-size: 1.5rem;
+      padding-bottom: 4px;
+    }
+
+    .navbar .links li ul li {
+      display: none;
+      color: #fff;
+      cursor: pointer;
+      width: 140px;
+      border-left: 1px solid rgba(128, 128, 128, 0.791);
+      border-right: 1px solid rgba(128, 128, 128, 0.778);
+
+    }
+
+    .navbar .links li:hover ul li {
+      display: block;
+      color: #FFF;
+      background: rgba(46, 46, 46, 0.371);
+      backdrop-filter: blur(15px);
+      cursor: pointer;
+
+    }
+
+    #navbar #button {
+      background-color: white;
+      color: #000;
+      border-radius: 10px;
+      border: 2px solid white;
+    }
+
+    #navbar #button:hover {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      transition: 0.3s ease-in;
+    }
+
+    .container {
+      position: relative;
+      max-width: 430px;
+      width: 100%;
+     
+      background-color: rgba(26, 26, 26, 0.4);
+
+      border-right: 2px solid rgba(255, 255, 255, 0.5);
+      border-left: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 50px rgba(0, 0, 0, .5);
+      overflow: hidden;
+      border-radius: 10px;
+      
+      top: 0;
+      margin-top: 0;
+      margin-left: 15px;
+
+    }
+
+    .container .forms {
+      display: flex;
+      align-items: center;
+      height: 180%;
+      width: 200%;
+      transition: 0.2s ease;
+    }
+
+
+    .container .form {
+      width: 50%;
+      padding: 30px;
+      background-color: transparent;
+      transition: 0.18s ease;
+    }
+
+    .container.active .login {
+      margin-left: -50%;
+      opacity: 0;
+      transition: 0.18s ease, 0.15s ease;
+    }
+
+    .container .signup {
+      opacity: 0;
+      transition: opacity 0.09s ease;
+    }
+
+    .container.active .signup {
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .container.active .forms {
+      height: 590px;
+    }
+
+    .container .form .title {
+      position: relative;
+      font-size: 27px;
+      font-weight: 600;
+    }
+
+    .form .title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      background-color: #fff;
+      border-radius: 25px;
+    }
+
+    .form .input-field {
+      position: relative;
+      height: 50px;
+      width: 100%;
+      margin-top: 30px;
+      background: transparent;
+      font-size: 1.2em;
+    }
+
+    .input-field input {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      padding: 0 35px;
+      border: none;
+      outline: none;
+      font-size: 1.2em;
+      border-bottom: 2px solid #fff;
+      border-top: 2px solid transparent;
+      transition: all 0.2s ease;
+      background: transparent;
+    }
+
+    .input-field input:is(:focus, :valid) {
+      border-bottom-color: #fff;
+    }
+
+    .input-field i {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 1.2em;
+      transition: all 0.2s ease;
+    }
+
+    .input-field input:is(:focus, :valid)~i {
+      color: #fff;
+    }
+
+    .input-field i.icon {
+      left: 0;
+    }
+
+    .input-field i.showHidePw {
+      right: 0;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .form .checkbox-text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .checkbox-text .checkbox-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-content input {
+      margin-right: 10px;
+      accent-color: rgba(250, 252, 253, 0.913);
+    }
+
+    .form .text {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .form a.text {
+      color: rgba(255, 255, 255, 0.913);
+      text-decoration: none;
+    }
+
+    .form a:hover {
+      text-decoration: underline;
+    }
+
+    .form .button {
+      margin-top: 10px;
+    }
+
+    .form .button input {
+      border: 2px solid white;
+      color: #000;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .button input:hover {
+      background-color: transparent;
+      color: white;
+      transition: 0.5s ease-in-out;
+    }
+
+    .form .login-signup {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    ::placeholder {
+      color: #ffff;
+    }
+    .text-words {
+      display: inline-block;
+      color: white;
+      font-size: 2rem;
+      margin-left: 55%;
+      margin-top: 240px;
+      top: 0;
+      z-index: -1;
+      position: fixed;
+      cursor: pointer;
+    }
+
+    .text-words.p {
+      display: none;
+      margin-top: 210px;
+      margin-left: 50%;
+      width: 444px;  /* Adjust size */
+      height: 260px;
+      background: url('images/logo4.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0;  /* Initially hidden */
+      transform: translateY(20px); /* Initial position - float from bottom */
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Same animation as text */
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    h1 span, p span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    }
+
+    h1 span.show, p span.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 span.hide, p span.hide {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .text-words p {
+      font-size: 2rem;
+      font-weight: 300;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .text-words.p.show {
+      opacity: 1;
+      transform: translateY(0);  /* Float into view */
+    }
+    #sign{
+    color: black;
+  }
+  #sign:hover{
+    color: #FFF;
+  }
+  
+
+  </style>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="shortcut icon" href="images/try.jpg" type="image/x-icon">
+</head>
+
+<body>
+  <header>
+    <div class="navigation">
+      <!--navbar start-->
+      <div class="navbar" id="navbar">
+        <!--Logo start-->
+        <div class="logo"></div>
+        <!--Logo end-->
+        <!--Links start-->
+        <ul class="links">
+          <li><a href="#"><i class="uil uil-estate"></i> Home</a></li>
+          <li><a href="#"><i class="uil uil-notebooks" style="margin-right: 3px;"></i>Courses</a></li>
+          <li><a href="#"> <i class="uil uil-info-circle"></i> About Us</a></li>
+          <li><a id="button" style="width: 40px; margin-left: 5px;">Sign Up</a></li>
+        </ul>
+        <!--Links end-->
+        <!--Toggle btn start-->
+        <div class="toggle_btn" id="btnn">
+          <i><img src="menu.png" style="height: 30px; width: 40px; z-index: +1;" /></i>
+        </div>
+        <!--Toggle btn end-->
+      </div>
+      <!--navbar end-->
+    </div>
+    <br>
+    <!--dropdown menu start-->
+  
+    <!--dropdown menu end-->
+  </header>
+  <div class="container" id="container">
+    <div class="forms">
+      
+      <div class="form login">
+        <span class="title" style="color: #fff;; font-size: 35px;">Login</span>
+
+        <form onsubmit="return validateLoginForm()" id="logForm">
+    
+          <div class="input-field">
+            <input type="email" name="email" placeholder="Enter your email" style="color: #FFF;"  id="emailLogin">
+            <i class="uil uil-envelope icon" style="color: #fff;"></i>
+          </div>
+          <br>
+          <div class="input-field">
+            <input type="password" class="password" name="email" style="color: #FFF; " placeholder="Enter your password" id="passwordLogin">
+            <i class="uil uil-lock icon"></i>
+            <i class="uil uil-eye-slash showHidePw"></i>
+          </div>
+          <br>
+          <div class="checkbox-text">
+            <div class="checkbox-content">
+              <input type="checkbox" id="logCheck">
+              <label for="logCheck" class="text">Remember me</label>
+            </div>
+
+            <a href="#" class="text">Forgot password?</a>
+          </div>
+          <br>
+          <div class="input-field button">
+
+            <a href="lms.html"> <input type="submit" value="Login"></a>
+
+          </div>
+        </form>
+
+        <div class="login-signup">
+          <span class="text" style=" font-size: 15px;" >Not a member?
+            <a href="#" class="text signup-link" style="font-size: 15px;">Signup Now</a>
+          </span>
+        </div>
+      </div>
+   
+      <!-- Registration Form -->
+
+      <div class="form signup">
+        <span class="title" style="color:#EFEFEF; font-size:35px">Registration</span>
+
+        <form  onsubmit="return validateForm()" id="regForm">
+
+          <div class="input-field">
+            <input type="text" placeholder="Enter your name" name="name" id="name" style="color: #FFF;">
+            <i class="uil uil-user"></i>
+          </div>
+
+          <div class="input-field">
+            <input type="email" placeholder="Enter your email" style="color: #FFF;" id="emailReg">
+            <i class="uil uil-envelope icon"></i>
+          </div>
+          <div class="input-field">
+            <input type="password" class="password" placeholder="Create a password" style="color: white;" id="passwordReg">
+            <i class="uil uil-lock icon"></i>
+          </div>
+          <div class="input-field">
+            <input type="password" class="password" placeholder="Confirm a password" style="color: #FFF;"  id="passwordCon">
+            <i class="uil uil-lock icon"></i>
+            <i class="uil uil-eye-slash showHidePw"></i>
+          </div>
+          <div class="checkbox-text">
+            <div class="checkbox-content">
+              <input type="checkbox" id="termCon">
+              <label for="termCon" class="text" style=" font-size: 15px; margin-top: 5px;">I accepted all terms and
+                conditions</label>
+            </div>
+          </div>
+
+          <div class="input-field button">
+            
+            <a href="lms.html"> <input type="submit" value="Signup" style="margin-top: 10px;"> </a>
+
+          </div>
+
+        </form>
+
+        <div class="login-signup">
+          <span class="text" style=" font-size: 15px;">Already a member?
+            <a href="#" class="text login-link" style=" font-size: 15px;">Login Now</a>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+<div class="smth" id="textThings">
+  <div class="text-words">
+    <h1 id="animated-heading">Welcome</h1>
+    <p id="animated-paragraph">to...</p>                                                                                          
+  </div>
+  <div class="text-words p" id="image-container"></div>
+
+  </div>
+</div>
+</body>
+<script src="main.js">
+
+// JS code to switch between signup and login form
+signUp.addEventListener("click", () => {
+  container.classList.add("active");
+});
+login.addEventListener("click", () => {
+  container.classList.remove("active");
+});
+
+
+// Text animation logic
+document.addEventListener("DOMContentLoaded", () => {
+  const heading = document.getElementById("animated-heading");
+  const text = heading.textContent;
+  const paragraph = document.getElementById("animated-paragraph");
+  const pText = paragraph.textContent;
+  const imageContainer = document.getElementById('image-container');
+
+  heading.textContent = '';  // Clear initial text in h1
+  paragraph.textContent = ''; // Clear initial text in p
+
+  // Animate h1 letters (float in)
+  text.split('').forEach((char, index) => {
+    const span = document.createElement('span');
+    span.textContent = char;
+    heading.appendChild(span);
+
+    setTimeout(() => {
+      span.classList.add('show');
+    }, index * 400); // Adjust the delay for h1 animation speed
+  });
+
+  // After h1 animation, animate the p tag (float in)
+  const h1AnimationTime = text.length * 400; // Total time for h1 animation
+  setTimeout(() => {
+    pText.split('').forEach((char, index) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      paragraph.appendChild(span);
+
+      setTimeout(() => {
+        span.classList.add('show');
+      }, index * 500); // Adjust the delay for p animation speed
+    });
+  }, h1AnimationTime);
+
+  // Animate text out and show the image
+  const totalTextAnimationTime = h1AnimationTime + pText.length * 500;
+
+  setTimeout(() => {
+    // Hide h1 letters
+    heading.querySelectorAll('span').forEach((span, index) => {
+      setTimeout(() => {
+        span.classList.remove('show');
+        span.classList.add('hide');
+      }, index * 150); // Delay for hiding
+    });
+
+    // Hide p letters
+    paragraph.querySelectorAll('span').forEach((span, index) => {
+      setTimeout(() => {
+        span.classList.remove('show');
+        span.classList.add('hide');
+      }, index * 150); // Delay for hiding
+    });
+
+    // After hiding text, display the image with the same float-in animation
+    setTimeout(() => {
+      imageContainer.style.display = 'block'; // Show the image container
+
+      setTimeout(() => {
+        imageContainer.style.opacity = 1; // Add animation effect for opacity
+        imageContainer.style.transform = 'translateY(0)'; // Float in the image
+      }, 300); // Slight delay before image floats in
+    }, pText.length * 300); // Delay based on how long it takes for the paragraph to fade out
+  }, totalTextAnimationTime + 1000); // Start fade-out after a delay
+});
+
+
+    
+</script>
+
+</html>

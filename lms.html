@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main LMS | OJ Tech Academy</title>
+  <link rel="stylesheet" href="responsive.css?v=1.0">
+  <link rel="shortcut icon" href="images/try.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+
+  <style>
+    @font-face {
+      font-family: "Poppins";
+      src: url("Font Folder/Poppins-Light.ttf") format("truetype");
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins";
+    }
+
+
+    body {
+      background: rgb(222, 219, 219);
+      padding: 12px 10px 0 10px;
+
+    }
+
+    header {
+      background-color: white;
+      border-radius: 10px;
+      width: 100%;
+      padding: 5px 20px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+
+      cursor: pointer;
+      justify-content: space-between;
+      box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2),
+        3px 4px 4px rgba(0, 0, 0, 0.2), 5px 5px 5px rgba(0, 0, 0, 0.2),
+        7px 7px 9px rgba(0, 0, 0, 0.2), 4px 5px 7px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    img {
+      height: 80px;
+      width: 80px;
+    }
+
+    .left-section .date {
+      margin-left: 50px;
+    }
+
+    .date {
+      margin-left: 20px;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .son {
+      display: none;
+    }
+
+    .notification,
+    .person,
+    .theme,
+    .menu,
+    .son {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Hide the .menu icon on larger screens */
+    .menu {
+      display: none;
+    }
+
+    /* Show the .menu icon only on screens 480px or smaller */
+    @media (max-width: 480px) {
+      .menu {
+        display: block;
+      }
+    }
+
+    /* Sidebar styling */
+    /* Sidebar styling */
+    #sidebar {
+      position: fixed;
+      right: -250px;
+      /* Initially hidden */
+      top: 0;
+      height: 100%;
+      width: 250px;
+      background: rgba(255, 255, 255, 0.1);
+      background-color: rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(15px);
+      color: #132538;
+      transition: right 0.3s ease;
+      z-index: 1;
+      padding-top: 15px;
+      font-weight: bold;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+
+    #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #sidebar ul li {
+      padding: 20px 20px 20px 30px;
+      text-align: left;
+      font-size: 1.2rem;
+    }
+
+    #sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Close icon inside the sidebar */
+    .close-menu {
+      text-align: right;
+      padding: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+      font-size: 1.3rem;
+      color: #fff;
+    }
+
+    .close-menu i {
+      font-size: 1.5rem;
+    }
+
+    /* Only show sidebar on small screens */
+    @media (max-width: 480px) {
+      #sidebar {
+        display: block;
+      }
+    }
+
+
+
+
+
+
+
+    section {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .sidebar {
+      background-color: white;
+      width: 200px;
+      border-radius: 10px;
+      padding: 4px 5px;
+      cursor: pointer;
+      box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2),
+        5px 5px 10px rgba(0, 0, 0, 0.2), 7.5px 7.5px 15px rgba(0, 0, 0, 0.2),
+        10px 10px 20px rgba(0, 0, 0, 0.2),
+        12.5px 12.5px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #current {
+      background-color: #16132f;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .sidebar .text {
+      padding: 10px 5px;
+      margin: 10px 5px;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .sidebar .text:hover {
+      background-color: whitesmoke;
+      transition: 0.5s ease-in-out;
+      border-radius: 10px;
+    }
+
+    #signOut {
+      background-color: rgb(231, 229, 229);
+      text-align: center;
+      border-radius: 10px;
+      color: #16132f;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: +1;
+    }
+
+    .modal .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .modal button {
+      margin: 20px;
+      padding: 3px 20px 3px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      color: white;
+      background-color: #132538;
+    }
+
+    .items {
+      flex: 1;
+      background: white;
+      padding: 17px;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2),
+        5px 5px 10px rgba(0, 0, 0, 0.2), 7.5px 7.5px 15px rgba(0, 0, 0, 0.2),
+        10px 10px 20px rgba(0, 0, 0, 0.2),
+        12.5px 12.5px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+      gap: 20px;
+      /* Space between banner and courses */
+    }
+
+    .banner {
+      animation: floatInFromBottom 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    .banner h1 {
+      font-size: 1.5rem;
+    }
+
+    .banner p {
+      margin-bottom: 0;
+      font-size: 1rem;
+      line-height: 23px;
+    }
+
+    .courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      /* Space between each course */
+    }
+
+    .course-item {
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      padding: 10px;
+      padding-top: 40px;
+      height: 170px;
+      width: 100px;
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.14);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: white;
+      /* animation: floatInFromBottom 1s ease-out forwards;
+      */
+    }
+    @media (max-width: 480px){
+  .courses{
+    height: auto; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;/* Remove scrolling */
+  }
+  .course-item{
+    width: 100%;
+  }
+  .courses .course-item{
+    margin-top: 20px;
+  }
+  .parent{
+    margin-top: -20px;
+  }
+}
+
+    .course-item button {
+      padding: 3px 10px;
+      font-size: 1.1rem;
+      border: none;
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      color: white;
+      background-color: #020012;
+      border: 1px solid white;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    }
+    .course-item button:hover{
+       background-color: transparent;
+       border-top-right-radius: 10px;
+       border-top-left-radius: 0px;
+       border-bottom-left-radius: 10px;
+       border-bottom-right-radius: 0px;
+       transition: 1s ease-in-out;
+       
+       
+    }
+
+    .parent {
+      animation: floatInFromBottom 1s ease-out forwards;
+    }
+
+    @keyframes floatInFromBottom {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .course-item:hover {
+      transform: scale(1.015);
+      transition: 0.5s ease-in-out;
+    }
+
+    .course-item.a {
+      background-image: url(images/color.jpg);
+    }
+
+    .course-item.b {
+      background-image: url(images/it.jpg);
+    }
+
+    .course-item.c {
+      background-image: radial-gradient(circle,
+          rgba(0, 0, 0, 0.7) 30%,
+          rgba(0, 0, 0, 0.9) 100%),
+        url(images/software.jpg);
+    }
+
+    .course-item.d {
+      background-image: radial-gradient(circle,
+          rgba(0, 0, 0, 0.7) 30%,
+          rgba(0, 0, 0, 0.9) 100%),
+        url(images/ll.png);
+    }
+
+    .calender {
+      height: 520px;
+      width: 300px;
+      background-color: white;
+      padding: 10px 3px 5px 0px;
+      border-radius: 10px;
+      box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.2),
+        5px 5px 10px rgba(0, 0, 0, 0.2), 7.5px 7.5px 15px rgba(0, 0, 0, 0.2),
+        10px 10px 20px rgba(0, 0, 0, 0.2),
+        12.5px 12.5px 25px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    #calendar {
+      font-family: Arial, sans-serif;
+      width: 6.9cm;
+      /* Approx 170px */
+      height: 6cm;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      margin-left: 0;
+      background-color: #f8f9fa;
+    }
+
+    #calendar .calendar-header {
+      background-color: #211c5c;
+      color: white;
+      padding: 5px 5px;
+      /* Reduced padding */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #calendar #monthYear {
+      font-size: 15px;
+      /* Reduced font size */
+    }
+
+    #calendar button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 15px;
+      /* Reduced font size */
+      cursor: pointer;
+    }
+
+    #calendar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #calendar thead th {
+      color: #211c5c;
+      padding: 5px 0;
+      /* Reduced padding */
+      font-size: 14px;
+      /* Reduced font size */
+    }
+
+    #calendar tbody td {
+      padding: 5px;
+      /* Reduced padding */
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      /* Reduced font size */
+    }
+
+    #calendar tbody td:hover {
+      background-color: #f0f0f0;
+    }
+
+    #calendar .current-day {
+      background-color: #211c5c;
+      color: white;
+      border-radius: 20%;
+    }
+
+    .music {
+      margin-top: 5px;
+    }
+
+    .events {
+      margin-top: 10px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      background-color: whitesmoke;
+      margin-left: 15.5px;
+      margin-right: 10.5px;
+      padding: 5px;
+      text-align: center;
+      border-radius: 5px;
+      height: 100px;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    h3 li {
+      text-align: left;
+      margin-left: 20px;
+      font-size: 1rem;
+    }
+
+    /* css for dashboard */
+    .profile-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      /* Align the profile image andG personal data vertically centered */
+      justify-content: space-between;
+      animation: floatInFromBottom 1s ease-out forwards;
+      /* Align them horizontally in a row */
+    }
+
+    .profile-container .box {
+      background-color: whitesmoke;
+      text-align: center;
+      width: 100%;
+      height: 10rem;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+    }
+
+    .profile-container .box p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .profile-container .box .icon {
+      font-size: 1.8rem;
+    }
+
+    h4 {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .profile-container1 {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 30px;
+    }
+
+    .profile-container1 .profile-picture {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #profileImage {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      margin-top: 60px;
+      box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-container1 .form {
+      width: 500px;
+    }
+
+    .profile-container1 input[type="file"] {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .profile-container1 .form-group {
+      margin-bottom: 15px;
+    }
+
+    .profile-container1 label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .profile-container1 input,
+    textarea {
+      width: 100%;
+      padding: 5px;
+      font-size: 1.1rem;
+      box-sizing: border-box;
+    }
+
+    .profile-container1 button {
+      width: 100%;
+      padding: 10px;
+      background-color: #11101d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .profile-container1 button:hover {
+      background-color: #132538;
+    }
+
+    .class .time-events {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .class h6 {
+      font-size: 1.2rem;
+    }
+
+    .class h1 {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .class span p,
+    h6 {
+      display: inline;
+    }
+
+    .class .img {
+      height: 8.5rem;
+      width: 15rem;
+      background-image: url("images/ll.png");
+      border-radius: 10px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .class .img.a {
+      background-image: url("images/color.jpg");
+    }
+
+    .class .img.b {
+      background-image: url("images/it.jpg");
+    }
+
+    .class .img.c {
+      background-image: url("images/2people.jpg");
+    }
+
+    .class .img.d {
+      background-image: url("images/graphics.jpg");
+    }
+
+    .class .img.e {
+      background-image: url("images/app.png");
+    }
+
+    .class .img.f {
+      background-image: url("images/images\ \(1\).jpg");
+    }
+
+    .class .tex {
+      margin-left: 7px;
+      width: 100%;
+    }
+
+    .class .ban button {
+      margin-left: 120px;
+      padding: 6px 10px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 10px;
+      background-color: #132538;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .class .ban {
+      display: flex;
+      margin-top: 16px;
+      width: 23.5rem;
+      border-radius: 10px;
+      background-color: whitesmoke;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+    }
+
+    .class .ban:hover {
+      transform: scale(1.012);
+      transition: 0.5s ease;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.14);
+    }
+
+    .ban {
+      opacity: 0;
+      transform: translateY(50px);
+      animation: floatIn 0.9s ease forwards;
+    }
+
+    .ban:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .ban:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .ban:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .ban:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+
+    .ban:nth-child(5) {
+      animation-delay: 1s;
+    }
+
+    .ban:nth-child(6) {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .class .ban p {
+      padding-right: 0px;
+      margin-top: -2px;
+    }
+
+
+    /* Responsive iframe */ 
+     iframe{
+        height: 487px;
+      }
+      @media (max-width: 480px){
+  iframe{
+    height: 37rem; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;/* Remove scrolling */
+  }
+}
+
+    .sometext {
+      height: 435px;
+    }
+    @media (max-width: 480px){
+      .sometext{
+    height: 30rem; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;/* Remove scrolling */
+  }
+}
+    .sometext p {
+      background-color: whitesmoke;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+      text-align: center;
+      padding: 30px;
+      animation: slideIn 1.5s forwards ease-in-out;
+    }
+
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .about {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      text-align: justify;
+      animation: slideIn 1.5s forwards ease-in-out;
+    }
+
+    .abouti {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      text-align: justify;
+      margin-top: 5px;
+      margin-bottom: 7px;
+
+
+    }
+
+    .about span {
+      background-color: whitesmoke;
+      border-radius: 10px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+      padding: 0px 10px 4px 10px;
+
+    }
+
+    .abouti .card {
+      background-color: whitesmoke;
+      border-radius: 10px;
+      animation: floatInFromBottom 1s ease-out forwards;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+
+    }
+
+    .about img {
+      border-radius: 10px;
+      height: 91px;
+      width: 100px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.14);
+    }
+
+    .about img:hover {
+      transition: 0.5s ease-in-out;
+      transform: rotate(20deg) scale(1.017);
+    }
+
+    .abouti p {
+      text-align: justify;
+      margin-top: 2px;
+      padding: 7px 10px;
+    }
+
+    .abouti .card .img {
+      height: 160px;
+      width: 100%;
+      border: 10px;
+      background-position: center;
+      background-size: cover;
+
+      border-radius: 10px;
+    }
+
+    .abouti .card .img.b {
+      background-image: url('images/2people.jpg');
+    }
+
+    .abouti .card .img.a {
+      background-image: url('images/ll.png');
+    }
+
+    .table1 {
+      height: 28rem;
+    }
+    @media (max-width: 480px){
+      .table1{
+    height: 31rem; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;/* Remove scrolling */
+  }
+}
+    
+    .table1 p {
+      margin-top: 5px;
+      background-color: whitesmoke;
+      text-align: center;
+      padding: 30px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+      animation: slideIn 1.5s forwards ease-in-out;
+    }
+    .graphics .card {
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%), url('images/graphics1.jpg');
+      background-position: center;
+      background-size: cover;
+      color: white;
+      text-align: justify;
+      padding: 10px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    }
+    .graphics .card.a{
+      /* background-image: url('images/web.jpg'); */
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%),url('images/web.jpg');
+     
+    }
+    .graphics h1{
+      font-size: 1.5rem;
+      display: inline;
+    }
+    .graphics{
+
+     
+   
+      cursor: pointer;
+      justify-content: space-between;
+    }
+    /* .graphics{
+      
+    } */
+    .graphics li {
+    text-decoration: none;
+    font-size: 1.15rem;
+    background-color: whitesmoke;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 1rem;
+    overflow-y: inherit;
+    padding: 10px  15px;
+    list-style: none;
+    display: flex; /* Make li a flex container */
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Align items vertically */
+}
+.submenu li i {
+    margin-right: 8px; /* Space between icon and text */
+    color: #1c3753; 
+    position: fixed;
+    /* Set icon color */
+}
+.submenu li a{
+  margin-left: 25px;
+  text-decoration: none;
+  color: #16132f;
+}
+/* General styles */
+#graphics {
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: 100%; /* Fallback height */
+  max-height: 487px; /* Max height for larger screens */
+ 
+  box-sizing: border-box;
+}
+
+/* For smaller screens like phones */
+@media (max-width: 480px) {
+  #graphics {
+    height: auto; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; /* Remove scrolling */
+  }
+}
+
+
+.graphics span {
+    font-size: 1rem;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background-color: #1c3753;
+}
+
+    .graphics .miniNav{
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+    }
+    .graphics .submenu li{
+      margin-top: 1px;
+      
+    }
+    .submenu {
+    margin-top: 4px;
+    display: none; /* Hide submenus by default */
+    overflow: hidden; /* Prevent overflow */
+    transition: max-height 1s ease, opacity 1s ease; /* Transition for height and opacity */
+   /* Set initial max-height to 0 for hidden state */
+    opacity: 0; /* Initially transparent */
+}
+
+.submenu.show {
+    display: block; /* Allow display to be block */
+  /* Adjust according to your content */
+    opacity: 1; /* Fully opaque */
+}
+    .graphics .miniNav p{
+     
+      width: 8rem;
+      text-align: center;
+      color: #11101d;
+      margin-top: 15px;
+      background-color: whitesmoke;
+      padding: 2px 10px 2px;
+      border-radius: 3px;
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    }
+    .graphics .Over {
+      margin-bottom: 10px;
+    }
+    .graphics .instructor{
+      display: none;
+    }
+    .graphics .aboutO{
+      display: none;
+    }
+    .graphics iframe{
+      margin-top: 10px;
+      height: 255px;
+    }
+    #graphics1,#graphics2,#graphics3{
+      overflow-y: auto; /* Enable vertical scrolling */
+          
+  height: 100%; /* Fallback height */
+  max-height: 486px; /* Max height for larger screens */
+ 
+  box-sizing: border-box;
+    }
+    @media (max-width: 480px) {
+      #graphics1,#graphics2,#graphics3{
+    height: auto; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; /* Remove scrolling */
+  }
+}
+#graphics1{
+  overflow-x: hidden;
+}
+#graphics1 .lesson-overview{
+   display: block;
+   text-align: justify;
+   
+}
+#graphics1 .lesson-content{
+   display: block;
+   text-align: justify;
+}
+
+#graphics1 h4{
+  background-color: white;
+  height: auto;
+  font-size: 1.1rem;
+}
+/* #graphics1 .lesson-content h4,p{
+  margin-top: 10px;
+} */
+footer {
+  text-align: center;
+  margin-top: 10px;
+}
+.bubble {
+    position: absolute;
+    bottom: 50px; /* Start from below the view */
+    background: radial-gradient(circle, rgba(194, 227, 234, 0.98) 0%, rgba(199, 214, 229, 0.5) 80%);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: rise 4s ease-in infinite; /* Animation */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                0 0 20px rgba(255, 255, 255, 0.5); /* Outer glow */
+    transform: scale(1); /* Initial scale */
+    transition: transform 0.3s ease; /* Smooth transition */
+    overflow-x: hidden;
+}
+
+/* Bubble hover effect */
+.bubble:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.8); /* Rise to the top and shrink */
+        opacity: 0; /* Fade out */
+    }
+}
+#btnBottoms{
+  display: flex;
+    justify-content: space-between; /* Space out the buttons */
+    align-items: center; /* Center vertically */
+    padding: 10px 20px; /* Padding around the navigation */
+    /* Background color for the navigation bar */
+    color: white; /* Text color */
+}
+#btnBottoms button{
+  width: 100px;
+  padding: 5px 10px;
+  background: #1c3753;
+  border-radius: 10px;
+  color: white;
+  border: none;
+}
+a{
+  text-decoration: none;
+}
+#graphics2 .recodings{
+   padding: 30px;
+   background-color: whitesmoke;
+}
+
+
+
+.quiz-container {
+    background: white;
+    border-radius: 8px;
+ 
+    
+}
+
+#quiz-formb{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+@media (max-width: 480px){
+  #quiz-formb{
+    height: auto; /* Automatically adjust height */
+    max-height: none; /* No max height restriction */
+    overflow: visible; 
+    display: block;/* Remove scrolling */
+  }
+}
+     
+#graphics3 .question {
+    margin-bottom: 20px;
+    text-align: justify;
+    width: 100%;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+
+#graphics3 #quiz-form button {
+    background-color: #1c3753;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px 5px;
+    cursor: pointer;
+    width: 100px;
+
+}
+
+#graphics3 #quiz-form button:hover {
+    background-color: #155a75;
+}
+
+/* Modal Styles */
+#graphics3 .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: +999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#graphics3 .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+#graphics3 .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#graphics3 .close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#loader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      border: 8px solid #f3f3f3; /* Light grey */
+      border-top: 8px solid #16132f; /* Dark grey/blue */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    /* Animation for rotating loader */
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="left-section">
+      <img src="images/try.jpg" height="70px" width="70px" />
+      <div class="date" id="currentDate"></div>
+    </div>
+    <div class="right-section">
+      <div class="notification" id="notificationBtn"><i class="uil uil-bell"></i></div>
+      <div class="person" onclick="userBtn()"><i class="uil uil-user-circle"></i></div>
+      <div class="menu" id="menuIcon" onclick="toggleSidebar()">
+        <i class="uil uil-list-ul"></i>
+      </div>
+      <div class="theme" onclick="darkTheme()"><i class="uil uil-moon"></i></div>
+      <div class="son"><i class="uil uil-sun"></i></div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="close-menu" onclick="toggleSidebar()">
+      <i class="uil uil-list-ui-alt"></i>
+    </div>
+    <ul>
+      <li><a id="learningBtnSmall" onclick="handleButtonClick('learningBtnSmall', 'learning.html')"><i class="uil uil-notebooks"></i> My Learning</a></li>
+      <li><a id="dashboardBtnSmall" onclick="handleButtonClick('dashboardBtnSmall', 'dashboard.html')"><i class="uil uil-create-dashboard"></i> Dashboard</a></li>
+      <li><a id="profileBtnSmall" onclick="handleButtonClick('profileBtnSmall', 'profile.html')"><i class="uil uil-user"></i> Profile</a></li>
+      <li><a id="classBtnSmall" onclick="handleButtonClick('classBtnSmall', 'class.html')"><i class="uil uil-calendar-alt"></i> Classes</a></li>
+      <li><a id="communityBtnSmall" onclick="handleButtonClick('communityBtnSmall', 'community.html')"><i class="uil uil-comment-alt-heart"></i> Community</a></li>
+      <li><a id="certificateBtnSmall" onclick="handleButtonClick('certificateBtnSmall', 'certificate.html')"><i class="uil uil-file-minus-alt"></i> Certificates</a></li>
+      <li><a id="leadBtnSmall" onclick="handleButtonClick('leadBtnSmall', 'lead.html')"><i class="uil uil-robot"></i> Leader Board</a></li>
+      <li><a id="aboutBtnSmall" onclick="handleButtonClick('aboutBtnSmall', 'about.html')"><i class="uil uil-comment-alt-info"></i> About Us</a></li>
+      <li ><a id="signOutBtnSmall" onclick="signOutSmall()"><i class="uil uil-signout"></i> Sign Out</a></li>
+    </ul>
+  </div>
+
+  <section>
+    <div class="sidebar">
+      <div class="text" id="learningBtn" 
+        style="background-color: #16132f; color: white; border-radius: 10px">
+        <i class="uil uil-notebooks"></i> My Learning
+      </div>
+      <div class="text" id="dashboardBtn" >
+        <i class="uil uil-create-dashboard"></i> Dashboard
+      </div>
+      <div class="text" id="profileBtn" >
+        <i class="uil uil-user"></i> Profile
+      </div>
+
+      <div class="text" id="classBtn" >
+        <i class="uil uil-calendar-alt"></i> Classes
+      </div>
+
+      <div class="text" id="communityBtn" >
+        <i class="uil uil-comment-alt-heart"></i> Community
+      </div>
+      <div class="text" id="certificateBtn" >
+        <i class="uil uil-file-minus-alt"></i> Certificates
+      </div>
+      <div class="text" id="leadBtn">
+        <i class="uil uil-robot" ></i> leader Board
+      </div>
+
+      <div class="text" id="aboutBtn" >
+        <i class="uil uil-comment-alt-info"></i> About Us
+      </div>
+      <div class="text" style="
+            background-color: rgb(231, 229, 229);
+            text-align: center;
+            border-radius: 10px;
+          " id="signOutBtn" onclick="signOut()">
+        <i class="uil uil-signout"></i> Sign Out
+      </div>
+    </div>
+    <div id="signOutModal" class="modal">
+      <div class="modal-content">
+        <p>Are you sure you want to sign out?</p>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </div>
+      <!-- 
+         -->
+
+    </div>
+
+
+    <div id="loader"></div>
+
+    
+    <div class="items" id="items">
+
+
+
+
+
+      <!-- load contents -->
+
+
+
+
+    </div>
+    <div class="calender" id="end">
+      <div class="date">
+        <h2><i class="uil uil-calendar-alt"></i> Calender</h2>
+        <div id="calendar">
+          <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <span id="monthYear"></span>
+            <button id="nextMonth">&gt;</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Su</th>
+                <th>Mo</th>
+                <th>Tu</th>
+                <th>We</th>
+                <th>Th</th>
+                <th>Fr</th>
+                <th>Sa</th>
+              </tr>
+            </thead>
+            <tbody id="calendar-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="music">
+        <h2><i class="uil uil-headphones"></i> Music</h2>
+        <audio controls>
+          <source src="images/Labisi_-_Olodumare_CeeNaija.com_.mp3" />
+          your browser dose not support the audio element
+        </audio>
+      </div>
+      <div class="events">
+        <h2><i class="uil uil-clipboard-notes"></i> Events</h2>
+        <h3>
+          <span>No events on this date</span>
+          <!-- <ul><li>Test this evening </li></ul>
+        <ul><li>Test this evening </li></ul>
+        <ul><li>Test this evening </li></ul>
+        <ul><li>Test this evening </li></ul>
+       -->
+        </h3>
+      </div>
+    </div>
+  </section>
+
+  <div id="notificationModal" class="modal">
+    <div class="modal-content">
+      <p>You Have No New Notifications</p>
+      <button id="noBtn2">Close</button>
+    </div>
+
+    <div id="userModal" class="modal">
+      <div class="modal-content">
+        <p> User </p>
+        <p>Name: </p>
+        <p>Phone No: </p>
+        <p>About: </p>
+        <button id="noBtn3">Close</button>
+      </div>
+</body>
+
+<script>
+
+
+  const sidebar = document.getElementById('sidebar');
+  const menuIcon = document.getElementById('menuIcon');
+  let sidebarOpen = false;
+
+  function toggleSidebar() {
+    if (sidebarOpen) {
+      // Close sidebar
+      sidebar.style.right = '-250px';
+    } else {
+      // Open sidebar
+      sidebar.style.right = '0';
+    }
+    sidebarOpen = !sidebarOpen;
+  }
+
+
+
+  function submitQuiz() {
+    let score = 0, total = 6, answers = {q1: 'A', q2: 'A', q3: 'A', q4: 'C', q5: 'B', q6: 'C'};
+    
+    // Check answers
+    for (let i = 1; i <= total; i++) {
+        let question = `q${i}`, selected = document.querySelector(`input[name="${question}"]:checked`);
+        if (selected && selected.value === answers[question]) score++;
+    }
+
+    // Calculate percentage score
+    let percentage = (score / total) * 100;
+    
+    // Display score in modal
+    document.getElementById('scoreText').innerText = `You scored ${percentage.toFixed(2)}%.`;
+    document.getElementById('scoreModal').style.display = 'block';
+    
+    return false; // Prevent form from submitting
+}
+
+
+        function closeModal() {
+            document.getElementById('scoreModal').style.display = 'none';
+        }
+
+        // Close modal if user clicks outside the modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('scoreModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+  
+//   document.getElementById('quiz-form').addEventListener('submit', function(e) {
+//     e.preventDefault(); // Prevent the form from submitting
+
+//     let score = 0;
+//     const answers = {
+//         q1: 'A',
+//         q2: 'A',
+//         q3: 'A',
+//         q4: 'C',
+//         q5: 'B'
+//     };
+
+//     // Check answers
+//     for (let i = 1; i <= 5; i++) {
+//         const question = `q${i}`;
+//         const selected = document.querySelector(`input[name="${question}"]:checked`);
+//         if (selected && selected.value === answers[question]) {
+//             score++;
+//         }
+//     }
+
+//     // Display score in modal
+//     document.getElementById('scoreText').innerText = `You scored ${score} out of 5.`;
+//     document.getElementById('scoreModal').style.display = 'block';
+// });
+
+// // Close modal
+// document.getElementById('closeModal').onclick = function() {
+//     document.getElementById('scoreModal').style.display = 'none';
+// }
+
+// // Close modal when clicking outside of it
+// window.onclick = function(event) {
+//     const modal = document.getElementById('scoreModal');
+//     if (event.target === modal) {
+//         modal.style.display = 'none';
+//     }
+// }
+
+
+  function signOutSmall(){
+    window.location.href = "index.html";
+  }
+  function openSubA(submenuId) {
+    const submenus = document.querySelectorAll('.submenu');
+    
+    submenus.forEach(submenu => {
+        if (submenu.id !== submenuId) {
+            submenu.classList.remove('show'); // Close other submenus
+        } else {
+            submenu.classList.toggle('show'); // Toggle the selected submenu
+        }
+    });
+}
+  
+
+// Function to create bubbles
+function createBubble() {
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+
+    // Randomize bubble size
+    const size = Math.random() * (50 - 10) + 10; // Size between 10 and 50 pixels
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+
+    // Randomize horizontal position
+    const leftPosition = Math.random() * window.innerWidth;
+    bubble.style.left = `${leftPosition}px`;
+
+    // Append bubble to the container
+    document.getElementById('cont').appendChild(bubble);
+
+    // Set a random animation delay for each bubble
+    bubble.style.animationDelay = `${Math.random() * 2}s`;
+
+    // Remove bubble after animation
+    setTimeout(() => {
+        bubble.remove();
+    }, 9000); // Match with the duration of the animation
+}
+
+// Create bubbles at intervals
+setInterval(createBubble, 1000); // Create a new bubble every 500 milliseconds
+
+
+  function overV() {
+    document.getElementById('over').style.display = 'block'
+        document.getElementById('aboutO').style.display = 'none'
+     document.getElementById('instructor').style.display = 'none'
+     
+  }
+  function instructO() {
+    document.getElementById('instructor').style.display = 'block'
+    document.getElementById('over').style.display = 'none'
+        document.getElementById('aboutO').style.display = 'none'
+  }
+  function aboutO() {
+    document.getElementById('instructor').style.display = 'none'
+    document.getElementById('over').style.display = 'none'
+    document.getElementById('aboutO').style.display = 'block'
+  }
+
+  // Function to display the current date
+  function displayDate() {
+    let dateElement = document.querySelector(".date"); // Assuming .date is the class used in your div
+
+    // Get today's date
+    let today = new Date();
+
+    // Get day, month, and year
+    let day = String(today.getDate()).padStart(2, "0");
+    let month = String(today.getMonth() + 1).padStart(2, "0"); // January is 0
+    let year = today.getFullYear();
+
+    // Format the date as DD/MM/YYYY
+    let formattedDate = `${day}/${month}/${year}`;
+
+    // Insert formatted date into the div
+    if (dateElement) {
+      dateElement.textContent = formattedDate;
+    }
+  }
+
+  // Call the displayDate function to show the date
+  displayDate();
+
+  // function signOut() {
+  //   alert("Are you sure you want to sign out ?")
+  //   window.location.href = 'ghost.html';
+  // }
+  //displaying toggle
+
+  // Function to handle button clicks
+ // Handle button clicks and load respective pages
+
+  function handleButtonClick(clickedButtonId, pageToLoad) {
+    const screenWidth = window.innerWidth;
+
+    // Remove styling from all buttons in the static sidebar
+    if (screenWidth > 480) {
+      document.querySelectorAll(".text").forEach((button) => {
+        button.style.backgroundColor = "";
+        button.style.color = "";
+        button.style.borderRadius = "";
+      });
+
+      // Apply styling to the clicked button (only on large screen buttons)
+      const clickedButton = document.getElementById(clickedButtonId);
+      clickedButton.style.backgroundColor = "#16132f";
+      clickedButton.style.color = "white";
+      clickedButton.style.borderRadius = "10px";
+    }
+
+    // If it's a small screen, close the collapsible sidebar after click
+    if (screenWidth <= 480) {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    // Load content for the clicked button
+    loadContent(pageToLoad);
+  }
+
+  // Function to load content into a specific element with a loader
+  function loadContent(page) {
+    let loaderTimeout = setTimeout(() => {
+      document.getElementById("loader").style.display = "block";
+    }, 300); // Show loader if loading takes more than 300ms
+
+    fetch(page)
+      .then((response) => response.text())
+      .then((data) => {
+        clearTimeout(loaderTimeout); // Clear timeout if page loads quickly
+        document.getElementById("loader").style.display = "none"; // Ensure loader is hidden
+        document.getElementById("items").innerHTML = data;
+
+        // If the loaded page is the profile page, load saved profile data
+        if (page === "profile.html") {
+          loadProfile();
+        }
+      })
+      .catch((error) => {
+        clearTimeout(loaderTimeout);
+        document.getElementById("loader").style.display = "none"; // Hide loader on error
+        console.error("Error loading the page:", error);
+      });
+  }
+
+  // Load the default page
+  loadContent("learning.html");
+
+  // Function to load saved profile data
+  function loadProfile() {
+    const profileImage = localStorage.getItem("profileImage");
+    const fullName = localStorage.getItem("fullName");
+    const email = localStorage.getItem("email");
+    const PHnumber = localStorage.getItem("PHnumber");
+    const bio = localStorage.getItem("bio");
+
+    // Load the image if it exists
+    if (profileImage) {
+      document.getElementById("profileImage").src = profileImage;
+    }
+
+    // Load the other profile details if they exist
+    if (fullName) {
+      document.getElementById("fullName").value = fullName;
+    }
+    if (email) {
+      document.getElementById("email").value = email;
+    }
+    if (PHnumber) {
+      document.getElementById("PHnumber").value = PHnumber;
+    }
+    if (bio) {
+      document.getElementById("bio").value = bio;
+    }
+  }
+
+  // Add event listeners for the buttons
+  document.getElementById("learningBtn").addEventListener("click", () => {
+    handleButtonClick("learningBtn", "learning.html");
+  });
+
+  document.getElementById("dashboardBtn").addEventListener("click", () => {
+    handleButtonClick("dashboardBtn", "dashboard.html");
+  });
+
+  document.getElementById("profileBtn").addEventListener("click", () => {
+    handleButtonClick("profileBtn", "profile.html");
+  });
+
+  document.getElementById("classBtn").addEventListener("click", () => {
+    handleButtonClick("classBtn", "class.html");
+  });
+
+  document.getElementById("communityBtn").addEventListener("click", () => {
+    handleButtonClick("communityBtn", "community.html");
+  });
+
+  document.getElementById("certificateBtn").addEventListener("click", () => {
+    handleButtonClick("certificateBtn", "certificate.html");
+  });
+
+  document.getElementById("leadBtn").addEventListener("click", () => {
+    handleButtonClick("leadBtn", "lead.html");
+  });
+
+  document.getElementById("aboutBtn").addEventListener("click", () => {
+    handleButtonClick("aboutBtn", "about.html");
+  });
+
+  // document.getElementById("graphicsBtn").addEventListener("click", () => {
+  //   handleButtonClick("graphicsBtn", "graphi.html");
+  // });
+
+  // Function to load content into a specific element
+  function loadContent(page) {
+    fetch(page)
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("items").innerHTML = data;
+
+        // Check if the loaded page is the profile page
+        if (page === "profile.html") {
+          // Call the loadProfile function to restore profile data from localStorage
+          loadProfile();
+        }
+      })
+      .catch((error) => console.error("Error loading the page:", error));
+  }
+
+  // Optionally, load a default page on initial load
+  loadContent("learning.html");
+
+  // Load the saved profile data on page load (after profile.html is loaded)
+  function loadProfile() {
+    const profileImage = localStorage.getItem("profileImage");
+    const fullName = localStorage.getItem("fullName");
+    const email = localStorage.getItem("email");
+    const PHnumber = localStorage.getItem("PHnumber");
+    const bio = localStorage.getItem("bio");
+
+    // Load the image if it exists
+    if (profileImage) {
+      document.getElementById("profileImage").src = profileImage;
+    }
+
+    // Load the other profile details if they exist
+    if (fullName) {
+      document.getElementById("fullName").value = fullName;
+    }
+
+    if (email) {
+      document.getElementById("email").value = email;
+    }
+
+    if (PHnumber) {
+      document.getElementById("PHnumber").value = PHnumber;
+    }
+
+    if (bio) {
+      document.getElementById("bio").value = bio;
+    }
+  }
+
+  function saveProfile() {
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const PHnumber = document.getElementById("PHnumber").value;
+    const bio = document.getElementById("bio").value;
+
+    // Save data to localStorage
+    localStorage.setItem("fullName", fullName);
+    localStorage.setItem("email", email);
+    localStorage.setItem("PHnumber", PHnumber);
+    localStorage.setItem("bio", bio);
+
+    alert("Profile saved successfully!");
+  }
+
+  function uploadProfileImage() {
+    const fileInput = document.getElementById("uploadImage");
+    const profileImage = document.getElementById("profileImage");
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      profileImage.src = reader.result;
+      localStorage.setItem("profileImage", reader.result);
+    };
+
+    if (fileInput.files[0]) {
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+  // function hideCalender() {
+  //   document.getElementById('end').style.display = 'none'
+  // }
+  // function showCalender(){
+  //   document.getElementById('end').style.display = 'block'
+  // }
+
+  const calendarBody = document.getElementById("calendar-body");
+  const monthYear = document.getElementById("monthYear");
+  const prevMonth = document.getElementById("prevMonth");
+  const nextMonth = document.getElementById("nextMonth");
+
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth();
+  let currentYear = currentDate.getFullYear();
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  function renderCalendar(month, year) {
+    calendarBody.innerHTML = "";
+    monthYear.textContent = `${months[month]} ${year}`;
+
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement("tr");
+
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement("td");
+
+        if (i === 0 && j < firstDay) {
+          cell.textContent = "";
+        } else if (date > daysInMonth) {
+          break;
+        } else {
+          cell.textContent = date;
+
+          if (
+            date === currentDate.getDate() &&
+            month === currentDate.getMonth() &&
+            year === currentDate.getFullYear()
+          ) {
+            cell.classList.add("current-day");
+          }
+
+          date++;
+        }
+
+        row.appendChild(cell);
+      }
+
+      calendarBody.appendChild(row);
+    }
+  }
+
+  prevMonth.addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  nextMonth.addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  renderCalendar(currentMonth, currentYear);
+
+  //modal
+
+  const signOutBtn = document.getElementById("signOutBtn");
+  const signOutBtnSmall = document.getElementById("signOutBtn");
+  const signOutModal = document.getElementById("signOutModal");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+
+
+  signOutBtnSmall.addEventListener("click", () => {
+    signOutModal.style.display = "flex";
+  });
+
+  // Show the modal when "Sign Out" button is clicked
+  signOutBtn.addEventListener("click", () => {
+    signOutModal.style.display = "flex";
+  });
+
+
+
+  // Redirect to ghost.html if "Yes" is clicked
+  yesBtn.addEventListener("click", () => {
+    window.location.href = "ghost.html";
+  });
+
+  // Close the modal if "No" is clicked
+  noBtn.addEventListener("click", () => {
+    signOutModal.style.display = "none";
+  });
+
+
+  let notificationBtn = document.getElementById("notificationBtn");
+  let notificationModal = document.getElementById("notificationModal");
+  let noBtn2 = document.getElementById("noBtn2");
+
+  // Show the modal when "Sign Out" button is clicked
+  notificationBtn.addEventListener("click", () => {
+    notificationModal.style.display = "flex";
+  });
+
+  // Close the modal if "No" is clicked
+  noBtn2.addEventListener("click", () => {
+    notificationModal.style.display = "none";
+  });
+
+
+
+  function userBtn() {
+    alert('Opps!, Button Inactive')
+  }
+  function darkTheme() {
+    alert('Dark Theme Currently Unavailable')
+  }
+
+ 
+</script>
+<script async src="http://tlk.io/embed.js" type="text/javascript"></script>
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = "https://embed.tawk.to/66fc2bed4cbc4814f7e19e15/1i94gn6rb";
+    s1.charset = "UTF-8";
+    s1.setAttribute("crossorigin", "*");
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<script src="main.js"></script>
+
+</html>

@@ -1,0 +1,152 @@
+@media (max-width: 460px) {
+    /* .container{
+        margin-top: 50px;
+        top: 70px;
+    } */
+     #container{
+        margin-top: 50px
+     }
+     #textThings,#btnn,.person{
+        display: none;
+     }
+  
+    html, body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    header {
+        width: 100%;
+        margin: 0;
+    }
+     
+    .sidebar, #end, .theme {
+        display: none;
+    }
+
+    section, .items {
+        margin-top: 0;
+    }
+
+    .course-item button {
+        margin-top: 0;
+    }
+
+    #dashboard .courses {
+        display: block;
+    }
+
+    #dashboard .course-item {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .profile-container1 {
+        display: block;
+        margin: 0;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    #profilePic {
+        margin: 0 auto;
+        /* margin-left: 70px; */
+    }
+
+    #profileForm {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .profile-container1 .form {
+        width: 100%;
+        /* if things went south here remove the next two lines */
+        margin-top: 350px;
+        margin-left: -300px;
+    }
+
+    #profileImage {
+        width: 150px;
+        height: 150px;
+        margin-left: 70px;
+        margin-top: -80px;
+    }
+
+    .profile-container1 input, textarea {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .profile-container1 button {
+        width: 100%;
+    }
+  /* Adjust class section */
+  .class .time-events {
+    display: block;
+    justify-content: space-around;
+    padding: 0 10px;
+}
+
+.class .ban {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.section2 {
+    margin: 20px 0;
+}
+
+/* Adjust text sizes */
+.class h6, .class h1 {
+    font-size: 1rem;
+}
+
+/* Adjust image sizes */
+.class .img {
+    height: 6rem;
+    width: 100%;
+  
+}
+
+.class .ban button {
+    margin: 0 auto;
+    display: block;
+    padding: 6px 10px;
+    width: 110px;
+}
+.section2{
+    margin-top: 550px;
+    margin-left: -495px;
+}
+.sometext {
+    
+    margin-bottom: 70px;
+}
+.table1{
+    margin-bottom: 70px;
+}
+#graphics i{
+    
+    display: block;
+}
+#graphics1 li{
+    list-style: none;
+}
+
+.graphics span{
+    display: flex;
+      align-items: right;
+      gap: 20px;
+     z-index: +1;
+      margin-left: -50px;
+      font-size: 1rem;
+      color: white;
+     padding: 2px 5px;
+     border-radius: 3px;
+      background-color: #1c3753;   
+   }
+
+}
+
