@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="shortcut icon" href="images/try.jpg" type="image/x-icon">
+    <style>
+        @font-face {
+            font-family: 'Poppins';
+            src: url('Font Folder/Poppins-Light.ttf') format('truetype');
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: 'Poppins';
+            background-position: center;
+            background-size: cover;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%), url('images/bridge.jpg');
+        }
+
+        /* Image container */
+        #image-container {
+            margin-top: -100px;
+            display: none;
+            /* Initially hidden */
+            width: 444px;
+            height: 260px;
+            background: url('images/logo4.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0;
+            /* Initially hidden */
+            transform: translateY(50px);
+            /* Start from below */
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        /* Show image on animation */
+        #image-container.show {
+            opacity: 1;
+            transform: translateY(0);
+            /* Float into view */
+        }
+
+        /* Button */
+        button {
+            color: black;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            border: 2px solid white;
+            cursor: pointer;
+            display: none;
+            /* Initially hidden */
+            opacity: 0;
+            transform: translateY(50px);
+            /* Start from below */
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background: transparent;
+            color: white;
+            transition: 0.7s ease-in-out;
+        }
+
+        /* Show button on animation */
+        button.show {
+            opacity: 1;
+            transform: translateY(0);
+            /* Float into view */
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+
+<body>
+    <div id="image-container"></div>
+    <br>
+    <a href="index2.html"><button id="animated-button">Continue <i class="uil uil-sign-out-alt"></i></button></a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const imageContainer = document.getElementById('image-container');
+            const button = document.getElementById('animated-button');
+
+            // Display the image with the float-in effect
+            setTimeout(() => {
+                imageContainer.style.display = 'block'; // Show the image container
+
+                setTimeout(() => {
+                    imageContainer.classList.add('show'); // Trigger the float-in animation for image
+                }, 300); // Slight delay before image floats in
+            }, 1000); // Delay before image animation starts
+
+            // After the image has finished loading, show the button
+            setTimeout(() => {
+                button.style.display = 'block'; // Show the button
+
+                setTimeout(() => {
+                    button.classList.add('show'); // Trigger the float-in animation for button
+                }, 300); // Slight delay before button floats in
+            }, 2000); // Delay before button animation starts after image
+        });
+    </script>
+</body>
+
+</html>
