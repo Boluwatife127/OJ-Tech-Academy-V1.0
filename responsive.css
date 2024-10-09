@@ -51,6 +51,7 @@
 
     #profilePic {
         margin: 0 auto;
+        margin-top: -40px;
         /* margin-left: 70px; */
     }
 
