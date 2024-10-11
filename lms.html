@@ -912,6 +912,7 @@ user-select: none; /* Prevent text selection */
       font-size: 1.5rem;
       display: inline;
     }
+
     .graphics{
 
      
@@ -1461,6 +1462,12 @@ document.head.appendChild(style);
     styles.innerHTML = `
       @media (max-width: 460px) {
         /* Center the about section */
+        body{
+        padding-bottom: 12px !important;
+        }
+        #graphics .card {
+        font-size: 1.1rem !important;
+        }
         .about {
           display: flex !important;
           flex-direction: column !important; /* Stack elements vertically */
