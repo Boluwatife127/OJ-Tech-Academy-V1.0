@@ -81,13 +81,16 @@ function validateLoginForm() {
   if (passwordLogin === '') {
     alert('Error! Password is empty.');
     valid = false;
-  } else if (passwordLogin !== '12345678') {
-    alert('Error! Password is INCORRECT, please contact Developer.');
-    valid = false;
-  } else if (passwordLogin.length < 8) {
-    alert('Error! Password must be at least 8 characters long.');
-    valid = false;
   }
+  
+  
+  // else if (passwordLogin !== '12345678') {
+  //   alert('Error! Password is INCORRECT, please contact Developer.');
+  //   valid = false;
+  // } else if (passwordLogin.length < 8) {
+  //   alert('Error! Password must be at least 8 characters long.');
+  //   valid = false;
+  // }
 
   // If all validations pass, log in
   if (valid) {
